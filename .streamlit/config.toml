@@ -7,8 +7,10 @@ textColor = "#0F1F1A"
 font = "sans serif"
 
 [server]
-headless = false
-runOnSave = true
+# headless=true is required on Streamlit Cloud (no browser to auto-open).
+# Locally, Streamlit will still print a URL in your terminal — open it
+# manually with cmd+click, or run `bash run.sh` which opens it for you.
+headless = true
 
 [browser]
 gatherUsageStats = false
