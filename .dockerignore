@@ -1,0 +1,11 @@
+.venv/
+.git/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+*.bak
+*.bak2
+*.bak.*
+node_modules/
+.streamlit/secrets.toml

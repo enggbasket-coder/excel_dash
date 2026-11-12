@@ -73,17 +73,21 @@ def _mac_status() -> dict:
 
 def _mac_run_macro(name: str) -> dict:
     safe = name.replace('"', '')
+    # Excel for Mac's command takes the macro name as a direct parameter
+    # (per Excel.sdef) — a labelled "macro name" parameter fails to compile.
     script = (
         'tell application "Microsoft Excel"\n'
-        f'    try\n'
-        f'        run VB macro macro name "{safe}"\n'
-        f'        return "ok"\n'
-        f'    on error errMsg\n'
-        f'        return "ERR: " & errMsg\n'
-        f'    end try\n'
+        '    with timeout of 1800 seconds\n'
+        '        try\n'
+        f'            run VB Macro "{safe}"\n'
+        '            return "ok"\n'
+        '        on error errMsg\n'
+        '            return "ERR: " & errMsg\n'
+        '        end try\n'
+        '    end timeout\n'
         'end tell'
     )
-    ok, out = _osascript(script, timeout=120)
+    ok, out = _osascript(script, timeout=1800)
     if not ok:
         return {"ok": False, "output": "", "error": out}
     if out.startswith("ERR:"):

@@ -196,17 +196,31 @@ section[data-testid="stSidebar"] .stButton > button:focus {
     box-shadow: none !important;
     outline: none !important;
 }
-/* Active nav state — primary buttons inside the sidebar render as a white pill */
-section[data-testid="stSidebar"] .stButton > button[kind="primary"] {
+/* Active nav state — primary buttons inside the sidebar render as a white pill.
+   Streamlit wraps the label in a nested <p>/<span>/<div>, so we have to push
+   the color down explicitly or the inner text stays white-on-white. */
+section[data-testid="stSidebar"] .stButton > button[kind="primary"],
+section[data-testid="stSidebar"] [data-testid="stBaseButton-primary"] {
     background: #FFFFFF !important;
     color: var(--pink-600) !important;
     font-weight: 700;
     border: none !important;
     box-shadow: 0 6px 16px rgba(0,0,0,0.12) !important;
 }
-section[data-testid="stSidebar"] .stButton > button[kind="primary"]:hover {
+section[data-testid="stSidebar"] .stButton > button[kind="primary"] *,
+section[data-testid="stSidebar"] [data-testid="stBaseButton-primary"] * {
+    color: var(--pink-600) !important;
+    fill: var(--pink-600) !important;
+}
+section[data-testid="stSidebar"] .stButton > button[kind="primary"]:hover,
+section[data-testid="stSidebar"] .stButton > button[kind="primary"]:hover *,
+section[data-testid="stSidebar"] [data-testid="stBaseButton-primary"]:hover,
+section[data-testid="stSidebar"] [data-testid="stBaseButton-primary"]:hover * {
     background: #FFFFFF !important;
     color: var(--pink-700) !important;
+    fill: var(--pink-700) !important;
+}
+section[data-testid="stSidebar"] .stButton > button[kind="primary"]:hover {
     transform: translateX(2px);
 }
 

@@ -1,7 +1,17 @@
-# Excel VBA Dashboard — runtime dependencies
-# Pinned conservatively so Streamlit Community Cloud builds are reproducible.
+# Excel VBA Dashboard — runtime dependencies (cloud-deployable)
 
 streamlit>=1.36,<2.0
 
-# Windows-only — installed automatically on Win, ignored on macOS/Linux/Cloud
+# HTTP calls to the VPS proxy (used by other tabs)
+requests>=2.31
+
+# Pure-Python xlsx read/write — works on any host (no Excel needed)
+openpyxl>=3.1
+
+# xlwings is only needed for the legacy local-Excel tabs (Macro / Audit etc.).
+# It's a no-op on hosts without Excel installed. Pinned-but-soft so the cloud
+# deploy doesn't fail if the platform skips it.
+xlwings>=0.31; sys_platform != "linux"
+
+# Windows-only COM bridge (xlwings uses this on Windows, ignored elsewhere)
 pywin32>=306; sys_platform == "win32"

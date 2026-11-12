@@ -15,7 +15,8 @@ from ui.theme import section_title, alert
 
 # Quick-preset macros — extend or load from settings later
 QUICK_PRESETS: list[dict] = [
-    {"name": "FindOverlap",     "icon": "🔍", "desc": "Locate overlapping date ranges"},
+    {"name": "FindOverlapsAllSheets", "icon": "🔍", "desc": "Flag overlapping / duplicate chainages on every sheet"},
+    {"name": "RFI_dupli",       "icon": "🧾", "desc": "Flag duplicate RFI numbers (same sheet & across sheets)"},
     {"name": "FormatSheet",     "icon": "🎨", "desc": "Apply standard SOR formatting"},
     {"name": "RecalcAll",       "icon": "🔄", "desc": "Force-recalculate every formula"},
     {"name": "ExportSummary",   "icon": "📤", "desc": "Dump summary to a new sheet"},

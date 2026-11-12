@@ -20,6 +20,8 @@ from tabs.macro import render_macro_tab
 from tabs.letters import render_letters_tab
 from tabs.audit import render_audit_tab
 from tabs.help import render_help_tab
+from tabs.llm_audit import render_llm_audit_tab
+from tabs.stripchart import render_stripchart_tab
 
 
 # ────────────────────────────────────────────────────────────────────────────
@@ -65,7 +67,7 @@ _init_state()
 # ────────────────────────────────────────────────────────────────────────────
 # Sidebar (brand + nav)
 # ────────────────────────────────────────────────────────────────────────────
-TABS = ["Macro", "Letters", "Audit", "Help"]
+TABS = ["Macro", "Letters", "Audit", "LLM Audit", "StripChart", "Help"]
 active = render_sidebar(TABS, st.session_state.active_tab)
 st.session_state.active_tab = active
 
@@ -108,5 +110,9 @@ elif active == "Letters":
     render_letters_tab()
 elif active == "Audit":
     render_audit_tab()
+elif active == "LLM Audit":
+    render_llm_audit_tab()
+elif active == "StripChart":
+    render_stripchart_tab()
 elif active == "Help":
     render_help_tab()
