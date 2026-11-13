@@ -1,5 +1,32 @@
 # Excel VBA Dashboard — project notes
 
+## What the user is trying to do
+The user is a highway-construction engineer who checks contractor bills (SPS =
+Stage Payment Statements). Each SPS workbook has one sheet per pavement layer
+(S.G / Subgrade, GSB, CTSB, WMM, DBM, BC) listing RFIs with From/To chainage and
+Side (LHS/RHS/BHS). The user wants a one-click dashboard that, on any SPS workbook:
+1. **Strip chart** — paints every layer's completed chainage on a combined chart
+   (first-selected layer at the bottom, nearest the chainage axis) and audits it:
+   overlaps within a layer (red) and an upper layer laid where the layer below is
+   missing (purple), with a remark beside each layer row.
+2. **Overlap check** — `FindOverlapsAllSheets` flags overlapping/duplicate
+   chainage rows on every sheet.
+3. **RFI duplicate audit** — `RFI_dupli` flags RFI numbers repeated on a sheet or
+   across sheets.
+Goals: get it working reliably on the user's Macs, hand the macro .xlsm files to
+colleagues, and possibly offer an online (upload/download) version later.
+The user prefers simple, conventional UI and plain-language explanations.
+
+## How to work on this project
+- The dashboard MUST run natively on macOS with Microsoft Excel open — it drives
+  Excel through osascript. If your shell is a sandbox/VM (not the user's Mac), do
+  not run `./run.sh` or create `.venv` there; ask the user to run it in Terminal or
+  operate the Mac's Terminal via computer use.
+- Before a run: open the SPS data workbook and the macro .xlsm in Excel (Enable
+  Macros), and set the chart range to the project's chainages (see gotchas).
+- After a strip-chart run, the macro's log is in the data workbook's hidden
+  `_SC_Cfg` sheet, column Z — read it first when diagnosing.
+
 Streamlit dashboard (port 8502) that drives the user's **live Excel on macOS** to run
 VBA macros on highway-construction measurement workbooks (SPS bills: S.G, GSB, WMM,
 DBM, BC layer sheets with From/To chainage + Side columns).
